@@ -5,6 +5,8 @@ import java.net.*;
 
 public class TCPClient {
 
+    public boolean isConnected;
+
     private String ip;
     private int port;
     private PrintWriter writer;
@@ -15,6 +17,7 @@ public class TCPClient {
     {
         this.ip = ip;
         this.port = port;
+        isConnected = false;
     }
 
     public void WriteMessage(String message)
@@ -30,10 +33,12 @@ public class TCPClient {
             writer = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             new Thread(new TCPServerListener(reader)).start();
+            isConnected = true;
         }
         catch (Exception x)
         {
             System.out.println("Failed to connect to server, socket error: " + x.getMessage());
+            isConnected = false;
         }
     }
 
@@ -42,6 +47,7 @@ public class TCPClient {
         if (socket.isConnected())
         {
             socket.close();
+            isConnected = false;
         }
     }
 
