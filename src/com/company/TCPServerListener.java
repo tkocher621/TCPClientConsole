@@ -1,9 +1,11 @@
 package com.company;
 
 import java.io.*;
+import java.net.*;
 
 public class TCPServerListener implements Runnable {
 
+    private Socket client;
     private BufferedReader reader;
 
     public void run()
@@ -18,15 +20,16 @@ public class TCPServerListener implements Runnable {
         }
     }
 
-    public TCPServerListener(BufferedReader read)
+    public TCPServerListener(Socket clnt, BufferedReader read)
     {
+        client = clnt;
         reader = read;
     }
 
     private void ListenForMessages() throws IOException
     {
         String packet;
-        while (true)
+        while (client.isConnected())
         {
             packet = reader.readLine();
             if (packet != null)

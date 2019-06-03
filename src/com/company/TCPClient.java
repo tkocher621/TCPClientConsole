@@ -32,7 +32,7 @@ public class TCPClient {
             socket = new Socket(ip, port);
             writer = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            new Thread(new TCPServerListener(reader)).start();
+            new Thread(new TCPServerListener(socket, reader)).start();
             isConnected = true;
         }
         catch (Exception x)

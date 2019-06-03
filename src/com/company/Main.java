@@ -68,6 +68,7 @@ public class Main {
         }
         while (!dc); // change this to handle a client disconnecting automatically
 
+        client.Disconnect();
         System.out.println("Disconnected from server.");
 
     }
