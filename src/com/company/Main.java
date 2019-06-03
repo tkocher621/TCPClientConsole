@@ -51,13 +51,24 @@ public class Main {
         System.out.println("You have entered the chat room!");
         System.out.println("------------------------");
 
-        //start payload
         client.WriteMessage(name);
 
-        while (true) // change this to handle a client disconnecting automatically
-        {
-            client.WriteMessage(scan.nextLine());
+        String packet;
+        boolean dc = false;
+        do {
+            packet = scan.nextLine();
+            if (packet.equals("/dc"))
+            {
+                dc = true;
+            }
+            else
+            {
+                client.WriteMessage(packet);
+            }
         }
+        while (!dc); // change this to handle a client disconnecting automatically
+
+        System.out.println("Disconnected from server.");
 
     }
 }

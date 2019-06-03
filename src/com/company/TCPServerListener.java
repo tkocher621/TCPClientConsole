@@ -25,9 +25,19 @@ public class TCPServerListener implements Runnable {
 
     private void ListenForMessages() throws IOException
     {
-        while (true) // replace
+        String packet;
+        while (true)
         {
-            System.out.println(reader.readLine());
+            packet = reader.readLine();
+            if (packet != null)
+            {
+                System.out.println(reader.readLine());
+            }
+            else
+            {
+                System.out.println("Unknown error communicating with server.\nClient has been disconnected.");
+                break;
+            }
         }
     }
 
