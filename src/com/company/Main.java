@@ -61,7 +61,7 @@ public class Main {
             {
                 dc = true;
             }
-            else
+            else if (!packet.equals(""))
             {
                 client.WriteMessage(packet);
             }

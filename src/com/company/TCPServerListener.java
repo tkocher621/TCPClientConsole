@@ -16,7 +16,10 @@ public class TCPServerListener implements Runnable {
         }
         catch (IOException x)
         {
-            System.out.println("Error: " + x.getMessage());
+            if (!client.isConnected())
+            {
+                System.out.println("Error: " + x.getMessage());
+            }
         }
     }
 
