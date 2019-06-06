@@ -37,11 +37,16 @@ public class TCPServerListener implements Runnable {
             packet = reader.readLine();
             if (packet != null)
             {
-                System.out.println(reader.readLine());
+                System.out.println(packet);
             }
             else
             {
-                System.out.println("Unknown error communicating with server.\nClient has been disconnected.");
+                if (!client.isConnected())
+                {
+                    System.out.println("Unknown error communicating with server.");
+                }
+                System.out.println("Client has been disconnected.");
+                client.getInputStream().close();
                 break;
             }
         }
